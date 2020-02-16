@@ -44,6 +44,13 @@
   display: flex;
   border-bottom: 1px solid #d2c6c6;
 }
+.table-body-container .red{
+color:red;
+}
+
+.table-body-container .green{
+color:green;
+}
 .table-body-container .table-body {
   margin: 5px;
   flex: 1 1;
@@ -64,13 +71,13 @@
 
 /* Footer */
 .table-footer {
-    border-top: 1px solid #f7efef;
-    color: #716f6f;
-    display: flex;
-    font-weight: 500;
-    background: whitesmoke;
-    justify-content: flex-end;
-    padding: 0px 15px;
-
+  border-top: 1px solid #f7efef;
+  color: #716f6f;
+  display: flex;
+  font-weight: 500;
+  background: whitesmoke;
+  justify-content: flex-end;
+  padding: 0px 15px;
+  height: 30px;
+  align-items: center;
 }
-

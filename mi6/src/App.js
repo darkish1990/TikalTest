@@ -2,21 +2,24 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { data } from "./mockData";
 import Table from "./Table/Table";
+import { distanceValue, getDistanceData, getMax } from "./utils/utils";
 
 function App() {
   let agents = {};
   const [mostIsolated, setMostIsolated] = useState({});
-  const [countries, setcountries] = useState({});
-  const getMax = countriesObj => {
-    return Object.keys(countriesObj).filter(agentsFilter => {
-      return (
-        countriesObj[agentsFilter] ===
-        Math.max.apply(null, Object.values(countriesObj))
-      );
-    });
-  };
+  const [countries, setCountries] = useState({});
+  const [addresses, setAddresses] = useState({});
+
   useEffect(() => {
     if (data) {
+      data.forEach((element, index) => {
+        setTimeout(() => {
+          setAddresses(
+            addresses,
+            distanceValue(getDistanceData(element.address))
+          );
+        }, 600 * index);
+      });
       data.sort((a, b) => new Date(a.date) - new Date(b.date));
       data.forEach(element => {
         if (agents[element.agent]) {
@@ -34,7 +37,7 @@ function App() {
           }
         }
       });
-      setcountries(countries);
+      setCountries(countries);
       setMostIsolated(getMax(countries));
     }
   }, []);
@@ -45,7 +48,7 @@ function App() {
         the most isolated country is {mostIsolated[0]} with{"  "}
         {countries[mostIsolated]} agents
       </h1>
-      <Table data={data} />
+      <Table data={data} addresses={addresses} />
     </div>
   );
 }

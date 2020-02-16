@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Table.css";
-export default function Table({ data }) {
+import { getMax, getMin } from "./../utils/utils";
+export default function Table({ data, addresses }) {
+  let maxAdd = getMax(addresses);
+  let minAdd = getMin(addresses);
+
   return (
     <>
       <div className="table-container">
@@ -12,7 +16,13 @@ export default function Table({ data }) {
         </div>
         {data.map(dataItem => {
           return (
-            <div className="table-body-container" key={dataItem.date}>
+            <div
+              className={`table-body-container ${
+                dataItem.address == maxAdd ? "red" : ""
+              } 
+              ${dataItem.address == minAdd ? "green" : ""}`}
+              key={dataItem.date}
+            >
               <div className="table-body">{dataItem.agent}</div>
               <div className="table-body">{dataItem.country}</div>
               <div className="table-body">{dataItem.address}</div>
