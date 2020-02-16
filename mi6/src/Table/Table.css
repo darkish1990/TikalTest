@@ -1,0 +1,76 @@
+/* Container */
+.table-container {
+  width: 80%;
+  margin: 40px auto;
+  box-shadow: 0 0 20px #cec6c6;
+  border: 1px solid #cabdbd;
+}
+
+/* Header */
+.table-header-container {
+  position: relative;
+  color: #4a4848;
+  display: flex;
+  font-weight: bold;
+  border-bottom: 2px solid #cec6c6;
+  background: whitesmoke;
+}
+.table-header-container .table-header {
+  flex: 1 1;
+  margin: 5px 0;
+  text-align: initial;
+}
+.table-header-container .table-header:nth-child(3) {
+  flex: 4 1;
+}
+.table-header-container .table-header:nth-child(4) {
+  flex: 2 1;
+}
+
+.table-header-container .table-header:nth-child(1)::before {
+  margin: 5px 5px;
+  position: relative;
+  content: "";
+}
+.table-header-container .table-header::before {
+  position: relative;
+  right: 3px;
+  margin: 5px 5px;
+  color: #cec6c6;
+  content: "|";
+}
+/* Body */
+.table-body-container {
+  display: flex;
+  border-bottom: 1px solid #d2c6c6;
+}
+.table-body-container .table-body {
+  margin: 5px;
+  flex: 1 1;
+  text-align: initial;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  height: 20px;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.table-body-container .table-body:nth-child(3) {
+  flex: 4 1;
+}
+.table-body-container .table-body:nth-child(4) {
+  flex: 2 1;
+}
+
+/* Footer */
+.table-footer {
+    border-top: 1px solid #f7efef;
+    color: #716f6f;
+    display: flex;
+    font-weight: 500;
+    background: whitesmoke;
+    justify-content: flex-end;
+    padding: 0px 15px;
+
+}
+
