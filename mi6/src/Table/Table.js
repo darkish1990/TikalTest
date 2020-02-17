@@ -4,10 +4,8 @@ export default function Table({ data, addsPlusCords }) {
   const [maxAdd, setMaxAdd] = useState();
   const [minAdd, setMinAdd] = useState();
   useEffect(() => {
-    if (addsPlusCords > 0) {
-      setMaxAdd(addsPlusCords[addsPlusCords.length - 1]);
-      setMinAdd(addsPlusCords[0]);
-    }
+    setMaxAdd(addsPlusCords[addsPlusCords.length - 1]);
+    setMinAdd(addsPlusCords[0]);
   }, [addsPlusCords]);
 
   return (
@@ -22,13 +20,8 @@ export default function Table({ data, addsPlusCords }) {
         {data.map(dataItem => {
           return (
             <div
-              className={`table-body-container ${
-                dataItem.address == maxAdd ? "red" : ""
-              } ${dataItem.address == minAdd ? "green" : ""}${console.log(
-                dataItem.address,
-                maxAdd,
-                minAdd
-              )}`}
+              className={`table-body-container ${dataItem.address == maxAdd?.address ? "red" : ""} 
+                ${dataItem.address == minAdd?.address ? "green" : ""}`}
               key={dataItem.date}
             >
               <div className="table-body">{dataItem.agent}</div>

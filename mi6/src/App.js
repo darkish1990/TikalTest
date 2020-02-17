@@ -39,7 +39,6 @@ function App() {
     });
     temp.sort((a, b) => new Number(a.distance) - new Number(b.distance));
     setAddsPlusCords(temp);
-    console.log(temp);
   }, [downingSTAddData]);
 
   function SetTheAddData() {
@@ -64,6 +63,7 @@ function App() {
         {countries[mostIsolated]} agents
       </h1>
       <Table data={data} addsPlusCords={addsPlusCords} />
+      <h4>*wait for the data i use a very slow api for it</h4>
     </div>
   );
 }
