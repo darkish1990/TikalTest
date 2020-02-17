@@ -39,16 +39,19 @@
   color: #cec6c6;
   content: "|";
 }
+
+
+
 /* Body */
 .table-body-container {
   display: flex;
   border-bottom: 1px solid #d2c6c6;
 }
-.table-body-container .red{
+.red{
 color:red;
 }
 
-.table-body-container .green{
+.green{
 color:green;
 }
 .table-body-container .table-body {

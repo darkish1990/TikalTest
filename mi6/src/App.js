@@ -2,45 +2,60 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { data } from "./mockData";
 import Table from "./Table/Table";
-import { distanceValue, getDistanceData, getMax } from "./utils/utils";
+import {
+  distanceValue,
+  getDistanceData,
+  getMax,
+  SetTheAgentsAndCountries
+} from "./utils/utils";
 
 function App() {
   let agents = {};
   const [mostIsolated, setMostIsolated] = useState({});
   const [countries, setCountries] = useState({});
-  const [addresses, setAddresses] = useState({});
-
+  const [downingSTAddData, setdowningSTAddData] = useState({});
+  const [addresses, setAddresses] = useState([]);
+  const [addsPlusCords, setAddsPlusCords] = useState([]);
   useEffect(() => {
     if (data) {
-      data.forEach((element, index) => {
-        setTimeout(() => {
-          setAddresses(
-            addresses,
-            distanceValue(getDistanceData(element.address))
-          );
-        }, 600 * index);
-      });
+      SetTheAddData();
       data.sort((a, b) => new Date(a.date) - new Date(b.date));
-      data.forEach(element => {
-        if (agents[element.agent]) {
-          agents[element.agent]++;
-        } else {
-          agents[element.agent] = 1;
-        }
-      });
-      data.forEach(element => {
-        if (agents[element.agent] === 1) {
-          if (countries[element.country]) {
-            countries[element.country]++;
-          } else {
-            countries[element.country] = 1;
-          }
-        }
-      });
+      SetTheAgentsAndCountries(data, agents, countries);
       setCountries(countries);
       setMostIsolated(getMax(countries));
     }
   }, []);
+
+  useEffect(() => {
+    const temp = [];
+    addresses.forEach(element => {
+      let distance = distanceValue(
+        downingSTAddData.lat,
+        downingSTAddData.lon,
+        element.lat,
+        element.lon
+      );
+      temp.push({ address: element.address, distance: distance });
+    });
+    temp.sort((a, b) => new Number(a.distance) - new Number(b.distance));
+    setAddsPlusCords(temp);
+    console.log(temp);
+  }, [downingSTAddData]);
+
+  function SetTheAddData() {
+    data.forEach((element, index) => {
+      setTimeout(async () => {
+        const t = await getDistanceData(element.address);
+        t["address"] = element.address;
+        addresses.push(t);
+        setAddresses(addresses);
+      }, 800 * index);
+    });
+    setTimeout(async () => {
+      const t = await getDistanceData("10 Downing st. London");
+      setdowningSTAddData(t);
+    }, 805 * data.length);
+  }
 
   return (
     <div className="App">
@@ -48,7 +63,7 @@ function App() {
         the most isolated country is {mostIsolated[0]} with{"  "}
         {countries[mostIsolated]} agents
       </h1>
-      <Table data={data} addresses={addresses} />
+      <Table data={data} addsPlusCords={addsPlusCords} />
     </div>
   );
 }

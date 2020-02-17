@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Table.css";
-import { getMax, getMin } from "./../utils/utils";
-export default function Table({ data, addresses }) {
-  let maxAdd = getMax(addresses);
-  let minAdd = getMin(addresses);
+export default function Table({ data, addsPlusCords }) {
+  const [maxAdd, setMaxAdd] = useState();
+  const [minAdd, setMinAdd] = useState();
+  useEffect(() => {
+    if (addsPlusCords > 0) {
+      setMaxAdd(addsPlusCords[addsPlusCords.length - 1]);
+      setMinAdd(addsPlusCords[0]);
+    }
+  }, [addsPlusCords]);
 
   return (
     <>
@@ -19,8 +24,11 @@ export default function Table({ data, addresses }) {
             <div
               className={`table-body-container ${
                 dataItem.address == maxAdd ? "red" : ""
-              } 
-              ${dataItem.address == minAdd ? "green" : ""}`}
+              } ${dataItem.address == minAdd ? "green" : ""}${console.log(
+                dataItem.address,
+                maxAdd,
+                minAdd
+              )}`}
               key={dataItem.date}
             >
               <div className="table-body">{dataItem.agent}</div>
