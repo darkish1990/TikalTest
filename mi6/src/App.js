@@ -64,6 +64,7 @@ function App() {
       </h1>
       <Table data={data} addsPlusCords={addsPlusCords} />
       <h4>*wait for the data i use a very slow api for it</h4>
+      <h4>you can watch the data comes on chrome dev tools console</h4>
     </div>
   );
 }
